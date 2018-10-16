@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/jsx">
+    var TestClick = React.createClass({
+        handleClick: function (e){
+            // var tip = this.refs.tip.getDOMNode();
+            var tip = React.findDOMNode(this.refs.tip);
+            if (tip.style.display === 'none'){
+                tip.style.display = 'block';
+            } else {
+                tip.style.display = 'none';
+            };
+        },
+
+
+        render: function (){
+            return (<div>Event <button onClick={this.handleClick}>show|hide</button> <span ref="tip">show hide</span></div>)
+        }
+    });
+
+    var TestInput = React.createClass({
+        getInitialState: function (){
+            return {
+                ipsContent: ''
+            }
+        },
+        changeHanlder: function (event){
+            console.log(event);
+            this.setState({
+                ipsContent: event.target.value
+            });
+
+        },
+        render: function (){
+            return (<div> <input type="text" onChange={this.changeHanlder} /><span>{this.state.ipsContent}</span></div>)
+        }
+    });
+
+    React.render((<div>
+        <TestClick></TestClick>
+        <TestInput></TestInput>
+    </div>), document.querySelector('#app'));
+
+
+console.log(ReactDOM);
+
+
+
+    // var EventList = React.createClass({
+    //     render: function (){
+    //         return (<div>
+    //             <TestClick></TestClick>
+    //             <TestInput></TestInput>
+    //         </div>);
+    //     }
+    // });
+</script>
+
+
+
+
+</body>
+</html>

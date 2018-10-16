@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+</head>
+<body>
+<div id="container">
+    <!-- this is render入口 -->
+</div>
+
+
+<!-- <script type="text/javascript" src="https://facebook.github.io/react/js/jsfiddle-integration.js"></script> -->
+
+<script type="text/jsx">
+    // 创建react自定义的components
+    const Hello = React.createClass({
+        // react 生命周期
+        /**
+         * [getInitialState]
+         * [定义默认值 有些类似vue 中的 data]
+         * @return {[type]} [description]
+         */
+        getInitialState: function (){
+            // alert('init')
+            return {
+                opacity: 1.0,
+                fontSize: '40px'
+            }
+        },
+        //
+        /**
+         * [componentWillMount]
+         * [react 组件还未加载到页面,钩子函数在数据为挂载之前，有些类似于vue之中created]
+         * @return {[type]} [description]
+         */
+        componentWillMount: function () {
+            // alert('will')
+        },
+        /**
+         * [render]
+         * [render 函数在处理完各个数据之后 最终渲染到页面的数据结构]
+         * @return {[type]} [description]
+         */
+        render: function (){
+            // alert('render');
+            // this 代表当前react Component 的实例
+            // props 为使用react Component 时在上所添加的属性值
+            // style 设置样式为 双大括号 第一个{}为 react 表达式  第二个为值
+            return (<div ref="hi" id="index" style={this.state}>{this.props.name}</div>);
+        },
+        /**
+         * [componentDidMount]
+         * [render 函数执行完毕之后执行的钩子 ，这时已经可以获取dom结构]
+         * @return {[type]} [description]
+         */
+        componentDidMount: function () {
+            // alert('Did')
+            // 获取当前dom 元素的方法
+            // console.log(this.getDOMNode());
+            var _this = this;
+            window.setTimeout(function (){
+                // 设置数据
+                this.setState({
+                    color: 'red'
+                })
+            }.bind(this), 3000);
+        },
+        /*-----------------------------------------------------------------*/
+        // 修改state时会触发
+        componentWillUpdate: function (){
+            // alert('willupdate');
+        },
+        componentDidUpdate: function (){
+            // alert('Didupdate');
+        },
+
+        componentWillReceiveProps: function (props){
+            // alert(ReceiveProps)
+            // console.log(props);
+        },
+
+        /**
+         * [shouldComponentUpdate]
+         * @param  {[type]} props [description]
+         * @param  {[type]} state [description]
+         * @return {[Boolean]}    [返回布尔值 确认是否继续往下执行 需不需要重新渲染render 函数]
+         */
+        shouldComponentUpdate: function (props, state){
+            // alert('should')
+            //
+            console.log(props);
+            console.log(state);
+            return true;
+
+        },
+        // 销毁react 函数
+        componentWillUnmount: function (){
+            alert('退出');
+        }
+    });
+
+    React.render(<Hello name="NS" />, document.getElementById('container'));
+</script>
+
+</body>
+</html>
